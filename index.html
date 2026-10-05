@@ -674,6 +674,26 @@ h1[tabindex="-1"]:focus{outline:none}
   .page-head .poster{font-size:21vw}
 }
 
+
+/* Fix the headline: give students the facts they're checking against */
+.edit-why{margin-top:1.6rem;max-width:56ch}
+.edit-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(1rem,3vw,2rem);margin-top:2rem;align-items:stretch;max-width:64rem}
+.edit-grid .headline-card{margin-top:0;max-width:none}
+.facts-card{background:var(--ink);color:var(--cloud);padding:clamp(1.2rem,3vw,1.8rem)}
+.facts-card .label{color:var(--yellow)}
+.facts-card .label::before{background:var(--yellow)}
+.facts-card ul{margin:.4rem 0 0;padding:0;list-style:none}
+.facts-card li{padding:.45rem 0;border-top:1px solid rgba(243,246,255,.3);font-size:.98rem}
+.facts-card li:last-child{font-weight:700;color:var(--yellow)}
+.facts-src{font-size:.82rem;margin:.8rem 0 0}
+.facts-src a{color:var(--yellow)}
+.edit-steps{margin-top:2rem;max-width:52rem}
+.edit-steps ol{margin:0;padding:0;list-style:none;counter-reset:e;display:grid;gap:.6rem}
+.edit-steps li{counter-increment:e;position:relative;padding-left:2.8rem;min-height:1.6rem}
+.edit-steps li::before{content:counter(e,decimal-leading-zero);position:absolute;left:0;top:-.1rem;font-family:var(--f-display);font-size:1.6rem;color:var(--orange);line-height:1}
+.edit-hint{font-size:.85rem;margin:.2rem 0 0}
+@media (max-width:900px){ .edit-grid{grid-template-columns:1fr} }
+
 /* ============== Responsive ============== */
 @media (max-width:900px){
   .split,.split.rev,.scrolly,.names,.routes,.studies,.labelwrap,.plan{grid-template-columns:1fr}
@@ -1170,7 +1190,7 @@ h1[tabindex="-1"]:focus{outline:none}
       <li><a href="#studies">Two studies</a></li>
       <li><a href="#ladder">Evidence ladder</a></li>
       <li><a href="#vote">Live vote</a></li>
-      <li><a href="#edit">30-second edit</a></li>
+      <li><a href="#edit">Fix the headline</a></li>
     </ol>
   </div>
 </section>
@@ -1320,24 +1340,52 @@ h1[tabindex="-1"]:focus{outline:none}
 <!-- ============ 14. 30-SECOND EDIT ============ -->
 <section id="edit" aria-labelledby="edit-h" class="on-light" data-prev="blue" data-cut="rev">
   <div class="wrap">
-    <p class="label">12 · Your turn</p>
-    <h2 id="edit-h">30-second edit.</h2>
-    <p class="lede" style="margin-top:1.2rem">You're the editor. This headline is going to print in thirty seconds. Make it match the evidence.</p>
+    <p class="label">12 · Your turn · 30-second edit</p>
+    <h2 id="edit-h">Fix the headline.</h2>
+    <p class="lede" style="margin-top:1.2rem">Headlines often claim more than a study found. Below is a made-up but typical headline about the Shoaff et al. study. Rewrite it so it says only what the study actually showed.</p>
 
-    <div class="headline-card">
-      <p class="label">Draft headline</p>
-      <p class="headline-bad"><span class="w">Plastic chemicals</span> <span class="w">cause</span> <span class="w">teen addiction</span>.</p>
+    <div class="hl edit-why">
+      <p class="label">Why this matters</p>
+      <p>This is the skill the whole lesson builds. Before you believe or share a health headline, check it against how the study was designed. If the words go further than the evidence, fix the words.</p>
+    </div>
+
+    <div class="edit-grid">
+      <div class="headline-card">
+        <p class="label">The headline</p>
+        <p class="headline-bad"><span class="w">Plastic chemicals</span> <span class="w">cause</span> <span class="w">teen addiction</span>.</p>
+      </div>
+      <div class="facts-card">
+        <p class="label">What the study actually did</p>
+        <ul>
+          <li>Human observational study of 205 adolescents</li>
+          <li>Urine samples measured exposure markers</li>
+          <li>Teachers rated behavior</li>
+          <li>Reported associations for selected phthalate markers</li>
+          <li>Did not test whether plastics cause addiction</li>
+        </ul>
+        <p class="facts-src">Shoaff et al., 2019. See the <a href="#studies">Two studies</a> section.</p>
+      </div>
+    </div>
+
+    <div class="edit-steps">
+      <p class="label">Check three things</p>
+      <ol>
+        <li><b>What was measured?</b> "Plastic chemicals" in general, or something more specific?</li>
+        <li><b>Cause or link?</b> Can an observational study show that one thing causes another?</li>
+        <li><b>What was the outcome?</b> Did anyone measure addiction?</li>
+      </ol>
     </div>
 
     <div class="edit-area">
-      <label for="rewrite">Your rewrite</label>
+      <label for="rewrite">Your headline</label>
       <textarea id="rewrite" placeholder="Study links…"></textarea>
       <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
-        <button class="btn" id="start-timer" type="button">Start 30 seconds</button>
+        <button class="btn" id="start-timer" type="button">Race the 30-second clock</button>
         <span class="timer" id="timer" aria-live="off">0:30</span>
         <span class="fuse" aria-hidden="true"><span id="fuse"></span></span>
-        <button class="btn btn-orange" id="reveal-btn" type="button">Show our version</button>
+        <button class="btn btn-orange" id="reveal-btn" type="button">Compare with ours</button>
       </div>
+      <p class="edit-hint">The clock is optional. In class, we give you 30 seconds.</p>
     </div>
 
     <div class="reveal" id="reveal" hidden>
@@ -1354,6 +1402,10 @@ h1[tabindex="-1"]:focus{outline:none}
             <tr><td><s>teen addiction</s></td><td>adolescent behavior scores</td><td>Teachers rated behavior. Nobody measured addiction.</td></tr>
           </tbody>
         </table>
+      </div>
+      <div class="hl" style="margin-top:1.6rem;max-width:52ch">
+        <p class="label">The takeaway</p>
+        <p>Same study, three changed words. The new headline is less dramatic and more accurate: it matches the claim to the study design.</p>
       </div>
     </div>
   </div>
@@ -2241,7 +2293,7 @@ h1[tabindex="-1"]:focus{outline:none}
     requestAnimationFrame(tick);
   }
   const follow = () => {
-    if (calm()) return;
+    if (calm() || !line) return; // not drawn yet (e.g. a deep link scrolls before fonts load)
     target = targetLen();
     if (!ticking) { ticking = true; requestAnimationFrame(tick); }
   };
